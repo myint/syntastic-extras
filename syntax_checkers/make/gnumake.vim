@@ -1,34 +1,42 @@
 "============================================================================
-"File:        gmake.vim
+"File:        gnumake.vim
 "Description: Syntax checking plugin for makefiles.
 "Maintainer:  Steven Myint
 "
 "============================================================================
 
-if exists("g:loaded_syntastic_make_gmake_checker")
+if exists("g:loaded_syntastic_make_gnumake_checker")
     finish
 endif
-let g:loaded_syntastic_make_gmake_checker = 1
+let g:loaded_syntastic_make_gnumake_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! SyntaxCheckers_make_gmake_GetLocList() dict
+function! SyntaxCheckers_make_gnumake_IsAvailable() dict
+    return executable('gtimeout') &&
+        \ system('make --version') =~# '^GNU Make ' &&
+        \ v:shell_error == 0
+endfunction
+
+function! SyntaxCheckers_make_gnumake_GetLocList() dict
     let makeprg = self.makeprgBuild({
         \ 'args_after': '--silent --just-print',
-        \ 'fname_before': '--file' })
+        \ 'args_before': '20 make',
+        \ 'fname_before': '--file'})
 
     let errorformat = '%f:%l: %m'
 
     return SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
-        \ 'returns': [0, 2] })
+        \ 'returns': [0, 2, 124]})
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'make',
-    \ 'name': 'gmake'})
+    \ 'exec': 'gtimeout',
+    \ 'name': 'gnumake'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
