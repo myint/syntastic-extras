@@ -25,11 +25,11 @@ function! SyntaxCheckers_make_gnumake_GetLocList() dict
         \ 'args_before': '20 make',
         \ 'fname_before': '--file'})
 
-    let errorformat = '%f:%l: %m'
-
     return SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat,
+        \ 'errorformat':
+        \     '%f:%l: %tarning: %m,' .
+        \     '%f:%l: %m',
         \ 'returns': [0, 2, 124]})
 endfunction
 
