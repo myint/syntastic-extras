@@ -22,7 +22,7 @@ endfunction
 function! SyntaxCheckers_make_gnumake_GetLocList() dict
     let makeprg = self.makeprgBuild({
         \ 'args_after': '--silent --just-print',
-        \ 'args_before': '20 make',
+        \ 'args_before': '3 make',
         \ 'fname_before': '--file'})
 
     return SyntasticMake({
