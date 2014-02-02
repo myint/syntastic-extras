@@ -14,7 +14,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 function! SyntaxCheckers_make_gnumake_IsAvailable() dict
-    return executable('gtimeout') &&
+    return executable('timeout') &&
         \ system('make --version') =~# '^GNU Make ' &&
         \ v:shell_error == 0
 endfunction
@@ -35,7 +35,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'make',
-    \ 'exec': 'gtimeout',
+    \ 'exec': 'timeout',
     \ 'name': 'gnumake'})
 
 let &cpo = s:save_cpo
