@@ -1,8 +1,6 @@
 "============================================================================
 "File:        gnumake.vim
 "Description: Syntax checking plugin for makefiles.
-"Maintainer:  Steven Myint
-"
 "============================================================================
 
 if exists("g:loaded_syntastic_make_gnumake_checker")

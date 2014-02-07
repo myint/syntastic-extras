@@ -1,8 +1,6 @@
 "============================================================================
 "File:        language_check.vim
 "Description: Grammar checker (https://github.com/myint/language-check)
-"Authors:     Steven Myint <git@stevenmyint.com>
-"
 "============================================================================
 
 if exists("g:loaded_syntastic_gitcommit_language_check_checker")
