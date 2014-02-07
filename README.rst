@@ -10,3 +10,7 @@ Checkers
 - GNU Make::
 
     let g:syntastic_make_checkers = ['gnumake']
+
+- Git commit language check::
+
+    let g:syntastic_gitconfig_checkers = ['language_check']
