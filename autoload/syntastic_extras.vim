@@ -1,6 +1,4 @@
 " For disabling ZZ if there are syntax errors.
-"
-" Usage: nnoremap ZZ :call syntastic_extras#quit_hook()<cr>
 function! syntastic_extras#quit_hook()
     write
     if g:syntastic_mode_map.mode ==# 'passive'
