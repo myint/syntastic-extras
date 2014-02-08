@@ -2,7 +2,9 @@
 syntastic-extras
 ================
 
-Additional syntax checkers for the Vim plugin Syntastic.
+Additional syntax checkers for the Vim plugin Syntastic_.
+
+.. _Syntastic: https://github.com/scrooloose/syntastic
 
 Checkers
 ========
