@@ -13,7 +13,9 @@ set cpo&vim
 
 function! SyntaxCheckers_gitcommit_language_check_GetLocList() dict
     let makeprg = self.makeprgBuild({
-        \ 'args_after': '--ignore-comments --spell-check-off'})
+        \ 'args_after':
+        \ '--disable=EN_QUOTES --disable=EN_UNPAIRED_BRACKETS ' .
+        \ '--ignore-comments --spell-check-off'})
 
     let errorformat =
         \ '%f:%l:%c: %m'
