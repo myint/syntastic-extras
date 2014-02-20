@@ -19,7 +19,13 @@ Checkers
 
 .. code-block:: vim
 
-    let g:syntastic_gitconfig_checkers = ['language_check']
+    let g:syntastic_gitcommit_checkers = ['language_check']
+
+- Subversion commit language check:
+
+.. code-block:: vim
+
+    let g:syntastic_svn_checkers = ['language_check']
 
 Hooks
 =====
