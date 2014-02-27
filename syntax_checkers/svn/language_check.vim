@@ -10,7 +10,7 @@ function! SyntaxCheckers_svn_language_check_GetLocList() dict
     let makeprg = self.makeprgBuild({
         \ 'args_after':
         \ '--disable=EN_QUOTES --disable=EN_UNPAIRED_BRACKETS ' .
-        \ '--ignore-lines="^(--|.    |@@|==|-|\+|}|Index: | +)" ' .
+        \ '--ignore-lines="^(--|.[ CM][ L][ \+]|@@|==|-|\+|}|Index: | +)" ' .
         \ '--spell-check-off'})
 
     let errorformat =
