@@ -27,7 +27,7 @@ except configparser.Error:
 
     line_number = getattr(error, 'lineno', 0)
     if not line_number:
-        found = re.search(r'\[line  ([0-9]+)\]', error.message)
+        found = re.search(r'\[line\s+([0-9]+)\]', error.message)
         if found:
             line_number = int(found.group(1))
 
