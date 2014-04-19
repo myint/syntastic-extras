@@ -12,7 +12,7 @@ import sys
 
 
 if len(sys.argv) != 2:
-    raise SystemExit('usage: cfg_check.py filename')
+    raise SystemExit('usage: %s filename' % (sys.argv[0],))
 filename = sys.argv[1]
 
 parser = ConfigParser()

@@ -1,20 +1,20 @@
-if exists("g:loaded_syntastic_cfg_cfg_checker")
+if exists("g:loaded_syntastic_dosini_dosini_checker")
     finish
 endif
-let g:loaded_syntastic_cfg_cfg_checker = 1
+let g:loaded_syntastic_dosini_dosini_checker = 1
 
 let s:save_cpo = &cpo
 set cpo&vim
 
-let s:checker = expand('<sfile>:p:h') . syntastic#util#Slash() . 'cfg.py'
+let s:checker = expand('<sfile>:p:h') . syntastic#util#Slash() . 'dosini.py'
 
-function! SyntaxCheckers_cfg_cfg_IsAvailable() dict
+function! SyntaxCheckers_dosini_dosini_IsAvailable() dict
     return executable(self.getExec()) &&
         \ syntastic#util#versionIsAtLeast(
             \ syntastic#util#getVersion(self.getExecEscaped() . ' -V'), [2, 4])
 endfunction
 
-function! SyntaxCheckers_cfg_cfg_GetLocList() dict
+function! SyntaxCheckers_dosini_dosini_GetLocList() dict
     let makeprg = self.makeprgBuild({'exe': [self.getExec(), s:checker]})
 
     return SyntasticMake({
@@ -25,9 +25,9 @@ function! SyntaxCheckers_cfg_cfg_GetLocList() dict
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
-    \ 'filetype': 'cfg',
+    \ 'filetype': 'dosini',
     \ 'exec': 'python',
-    \ 'name': 'cfg'})
+    \ 'name': 'dosini'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
