@@ -21,6 +21,7 @@ parser = ConfigParser()
 try:
     parser.read(filename)
 except configparser.MissingSectionHeaderError:
+    # Ignore non-standard cfg files.
     pass
 except configparser.Error:
     error = sys.exc_info()[1]
