@@ -9,7 +9,7 @@ Additional syntax checkers for the Vim plugin Syntastic_.
 Checkers
 ========
 
-- `cfg`/`dosini` syntax checker:
+- ``cfg``/``dosini`` syntax checker:
 
 .. code-block:: vim
 
@@ -22,7 +22,7 @@ Checkers
 
     let g:syntastic_make_checkers = ['gnumake']
 
-- Language check in Git/Subversion commit prompt:
+- Language check in ``gitcommit``/``svn`` (commit prompts):
 
 .. code-block:: vim
 
