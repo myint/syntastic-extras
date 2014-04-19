@@ -13,12 +13,13 @@ import sys
 
 if len(sys.argv) != 2:
     raise SystemExit('usage: cfg_check.py filename')
+filename = sys.argv[1]
 
 parser = ConfigParser()
 
 # Use ugly syntax to support very old versions of Python.
 try:
-    parser.read(sys.argv[1])
+    parser.read(filename)
 except configparser.Error:
     error = sys.exc_info()[1]
 
@@ -29,4 +30,4 @@ except configparser.Error:
             line_number = int(found.group(1))
 
     sys.stderr.write('%s:%s: %s\n' %
-                     (error.filename, line_number, error.message))
+                     (filename, line_number, error.message))
