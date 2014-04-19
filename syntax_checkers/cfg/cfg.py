@@ -20,6 +20,8 @@ parser = ConfigParser()
 # Use ugly syntax to support very old versions of Python.
 try:
     parser.read(filename)
+except configparser.MissingSectionHeaderError:
+    pass
 except configparser.Error:
     error = sys.exc_info()[1]
 
