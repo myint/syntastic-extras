@@ -19,18 +19,14 @@ parser = ConfigParser()
 # Use ugly syntax to support very old versions of Python.
 try:
     parser.read(sys.argv[1])
-except configparser.ParsingError:
-    error = sys.exc_info()[1]
-
-    # "error.lineno" is not populated in this case.
-    line_number = 0
-    found = re.search(r'\[line  ([0-9]+)\]', error.message)
-    if found:
-        line_number = int(found.group(1))
-
-    sys.stderr.write('%s:%s: %s\n' %
-                     (error.source, line_number, error.message))
 except configparser.Error:
     error = sys.exc_info()[1]
+
+    line_number = getattr(error, 'lineno', 0)
+    if not line_number:
+        found = re.search(r'\[line  ([0-9]+)\]', error.message)
+        if found:
+            line_number = int(found.group(1))
+
     sys.stderr.write('%s:%s: %s\n' %
-                     (error.source, error.lineno, error.message))
+                     (error.filename, line_number, error.message))
