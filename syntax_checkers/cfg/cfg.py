@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+"""Check config file syntax."""
+
 try:
     from configparser import ConfigParser
     import configparser
