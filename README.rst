@@ -9,7 +9,7 @@ Additional syntax checkers for the Vim plugin Syntastic_.
 Checkers
 ========
 
-- ``cfg``/``dosini`` syntax checker:
+- ``cfg``/``dosini``:
 
 .. code-block:: vim
 
@@ -28,6 +28,12 @@ Checkers
 
     let g:syntastic_gitcommit_checkers = ['language_check']
     let g:syntastic_svn_checkers = ['language_check']
+
+- YAML:
+
+.. code-block:: vim
+
+    let g:syntastic_yaml_checkers = ['pyyaml']
 
 Hooks
 =====
