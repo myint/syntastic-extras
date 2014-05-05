@@ -3,10 +3,8 @@
 """Check config file syntax."""
 
 try:
-    from configparser import ConfigParser
     import configparser
 except ImportError:
-    from ConfigParser import SafeConfigParser as ConfigParser
     import ConfigParser as configparser
 
 import re
@@ -18,7 +16,7 @@ def main():
         raise SystemExit('usage: %s filename' % (sys.argv[0],))
     filename = sys.argv[1]
 
-    parser = ConfigParser()
+    parser = configparser.RawConfigParser()
 
     # Use ugly syntax to support very old versions of Python.
     try:
