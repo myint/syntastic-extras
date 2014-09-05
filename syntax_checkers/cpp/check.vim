@@ -28,7 +28,8 @@ function! SyntaxCheckers_cpp_check_GetLocList() dict
     endif
 
     let makeprg = self.makeprgBuild({
-        \ 'exe': [self.getExec(), s:checker, g:syntastic_cpp_compiler]})
+        \ 'args_before': s:checker,
+        \ 'args_after': g:syntastic_cpp_compiler})
 
     return SyntasticMake({
         \ 'makeprg': makeprg,
