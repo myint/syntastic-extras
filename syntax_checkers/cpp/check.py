@@ -6,6 +6,8 @@ import os
 import subprocess
 import sys
 
+INCLUDE_OPTION = '-I'
+
 
 def find_configuration(start_path):
     """Return path to configuration.
@@ -26,6 +28,18 @@ def find_configuration(start_path):
     return None
 
 
+def read_lines(filename):
+    """Return split lines from file without line endings."""
+    input_file = None
+    try:
+        input_file = open(filename)
+        lines = input_file.read().splitlines()
+    finally:
+        if input_file:
+            input_file.close()
+    return lines
+
+
 def read_configuration(start_path):
     """Return compiler options from configuration.
 
@@ -34,15 +48,19 @@ def read_configuration(start_path):
     """
     configuration_path = find_configuration(os.path.abspath(start_path))
     if configuration_path:
-        input_file = None
-        try:
-            input_file = open(configuration_path)
-            return input_file.read().splitlines()
-        finally:
-            if input_file:
-                input_file.close()
+        raw_lines = read_lines(configuration_path)
     else:
         return None
+
+    options = []
+    for line in raw_lines:
+        if line.startswith(INCLUDE_OPTION):
+            options.append('-isystem')
+            options.append(line[len(INCLUDE_OPTION):].lstrip())
+        else:
+            options.append(line)
+
+    return options
 
 
 def main():
