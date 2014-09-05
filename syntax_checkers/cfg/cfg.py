@@ -35,6 +35,7 @@ def main():
 
         sys.stderr.write('%s:%s: %s\n' %
                          (filename, line_number, error.message))
+        return 1
 
 
 if __name__ == '__main__':

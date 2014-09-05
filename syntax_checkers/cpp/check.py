@@ -83,9 +83,14 @@ def main():
     if sys.version_info[0] > 2:
         errors = errors.decode(locale.getpreferredencoding())
 
+    exit_status = 0
+
     for line in errors.splitlines(True):
         if filename in line:
             sys.stderr.write(line)
+            exit_status = 1
+
+    return exit_status
 
 
 if __name__ == '__main__':

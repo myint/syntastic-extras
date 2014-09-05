@@ -21,7 +21,7 @@ function! SyntaxCheckers_cfg_cfg_GetLocList() dict
         \ 'makeprg': makeprg,
         \ 'errorformat':
         \     '%f:%l: %m',
-        \ 'returns': [0]})
+        \ 'returns': [0, 1]})
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({

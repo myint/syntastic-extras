@@ -7,7 +7,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 let s:checker = expand('<sfile>:p:h') . syntastic#util#Slash() .
-            \ 'check_yaml.py'
+    \ 'check_yaml.py'
 
 function! SyntaxCheckers_yaml_pyyaml_IsAvailable() dict
     return executable(self.getExec()) &&
@@ -22,7 +22,7 @@ function! SyntaxCheckers_yaml_pyyaml_GetLocList() dict
         \ 'makeprg': makeprg,
         \ 'errorformat':
         \     '%f:%l:%c: %m',
-        \ 'returns': [0]})
+        \ 'returns': [0, 1]})
 endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
