@@ -2,6 +2,10 @@
 syntastic-extras
 ================
 
+.. image:: https://travis-ci.org/myint/syntastic-extras.svg?branch=master
+    :target: https://travis-ci.org/myint/syntastic-extras
+    :alt: Build status
+
 Additional syntax checkers for the Vim plugin Syntastic_.
 
 .. _Syntastic: https://github.com/scrooloose/syntastic
