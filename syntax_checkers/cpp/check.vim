@@ -1,5 +1,5 @@
 " Like Syntastic's normal checker, but only checks files if there is a
-" '.syntastic_cpp_config' file existing in the directory or ancestor
+" '.syntastic_cpp_config' file existing in the directory or an ancestor
 " directory.
 
 if exists('g:loaded_syntastic_cpp_check_checker')
