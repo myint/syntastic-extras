@@ -1,5 +1,8 @@
 language: python
 
+install:
+    - pip install pyyaml
+
 python:
     - "2.6"
     - "2.7"
