@@ -74,7 +74,13 @@ def main():
     if options is None:
         return 0
 
-    return subprocess.call([compiler, '-fsyntax-only'] + options + [filename])
+    process = subprocess.Popen([compiler, '-fsyntax-only'] +
+                               options + [filename],
+                               stderr=subprocess.PIPE)
+    errors = process.communicate()[1].decode()
+    for line in errors.splitlines(True):
+        if filename in line:
+            sys.stderr.write(line)
 
 
 if __name__ == '__main__':
