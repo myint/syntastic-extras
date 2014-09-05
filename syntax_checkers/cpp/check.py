@@ -7,7 +7,6 @@ import os
 import subprocess
 import sys
 
-ENCODING = locale.getpreferredencoding()
 INCLUDE_OPTION = '-I'
 
 
@@ -79,7 +78,11 @@ def main():
     process = subprocess.Popen([compiler, '-fsyntax-only'] +
                                options + [filename],
                                stderr=subprocess.PIPE)
-    errors = process.communicate()[1].decode(ENCODING)
+
+    errors = process.communicate()[1]
+    if sys.version_info[0] > 2:
+        errors = errors.decode(locale.getpreferredencoding())
+
     for line in errors.splitlines(True):
         if filename in line:
             sys.stderr.write(line)
