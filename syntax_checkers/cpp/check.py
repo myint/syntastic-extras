@@ -2,10 +2,12 @@
 
 """Check C++ file syntax."""
 
+import locale
 import os
 import subprocess
 import sys
 
+ENCODING = locale.getpreferredencoding()
 INCLUDE_OPTION = '-I'
 
 
@@ -77,7 +79,7 @@ def main():
     process = subprocess.Popen([compiler, '-fsyntax-only'] +
                                options + [filename],
                                stderr=subprocess.PIPE)
-    errors = process.communicate()[1].decode()
+    errors = process.communicate()[1].decode(ENCODING)
     for line in errors.splitlines(True):
         if filename in line:
             sys.stderr.write(line)
