@@ -29,7 +29,9 @@ function! SyntaxCheckers_cpp_check_GetLocList() dict
 
     let makeprg = self.makeprgBuild({
         \ 'args_before': s:checker,
-        \ 'args_after': g:syntastic_cpp_compiler})
+        \ 'args_after':
+            \ g:syntastic_cpp_compiler . ' ' .
+            \ g:syntastic_cpp_compiler_options})
 
     return SyntasticMake({
         \ 'makeprg': makeprg,

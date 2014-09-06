@@ -69,17 +69,17 @@ def read_configuration(start_path):
 
 
 def main():
-    if len(sys.argv) != 3:
-        raise SystemExit('usage: %s compiler filename' % (sys.argv[0],))
-    compiler = sys.argv[1]
-    filename = sys.argv[2]
+    if len(sys.argv) < 3:
+        raise SystemExit('usage: %s command filename' % (sys.argv[0],))
+    command = sys.argv[1:-1]
+    filename = sys.argv[-1]
 
     options = read_configuration(filename)
 
     if options is None:
         return 0
 
-    process = subprocess.Popen([compiler, '-fsyntax-only'] +
+    process = subprocess.Popen(command + ['-fsyntax-only'] +
                                options + [filename],
                                stderr=subprocess.PIPE)
 
