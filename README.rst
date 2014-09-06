@@ -13,6 +13,15 @@ Additional syntax checkers for the Vim plugin Syntastic_.
 Checkers
 ========
 
+- C:
+
+.. code-block:: vim
+
+    " Like Syntastic's normal checker, but only checks files if there is a
+    " '.syntastic_c_config' file existing in the directory or an ancestor
+    " directory.
+    let g:syntastic_c_checkers = ['check']
+
 - C++:
 
 .. code-block:: vim
