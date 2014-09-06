@@ -28,7 +28,8 @@ endfunction
 
 function! SyntaxCheckers_cpp_check_GetLocList() dict
     if !exists('g:syntastic_cpp_compiler')
-        let g:syntastic_cpp_compiler = executable('g++') ? 'g++' : 'clang++'
+        let g:syntastic_cpp_compiler =
+            \ executable('clang++') ? 'clang++' : 'g++'
     endif
 
     let makeprg = self.makeprgBuild({
