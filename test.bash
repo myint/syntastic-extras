@@ -1,10 +1,16 @@
 #!/bin/bash -eux
 
 ./syntax_checkers/cfg/cfg.py test/good.cfg
+./syntax_checkers/c/check.py .syntastic_c_config gcc test/good.c
 ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/good.cpp
 ./syntax_checkers/yaml/check_yaml.py test/good.yaml
 
 if ./syntax_checkers/cfg/cfg.py test/bad.cfg
+then
+    exit 1
+fi
+
+if ./syntax_checkers/c/check.py .syntastic_c_config gcc test/bad.c
 then
     exit 1
 fi
