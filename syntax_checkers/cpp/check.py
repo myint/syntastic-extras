@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Check C++ file syntax."""
+"""Check C/C++ file syntax."""
 
 import locale
 import os
@@ -11,7 +11,7 @@ import sys
 INCLUDE_OPTION = '-I'
 
 
-def find_configuration(start_path):
+def find_configuration(start_path, configuration_filename):
     """Return path to configuration.
 
     Return None if there is no configuration.
@@ -20,7 +20,7 @@ def find_configuration(start_path):
     while start_path:
         start_path = os.path.dirname(start_path)
 
-        configuration_path = os.path.join(start_path, '.syntastic_cpp_config')
+        configuration_path = os.path.join(start_path, configuration_filename)
         if os.path.exists(configuration_path):
             return configuration_path
 
@@ -42,13 +42,16 @@ def read_lines(filename):
     return lines
 
 
-def read_configuration(start_path):
+def read_configuration(start_path, configuration_filename):
     """Return compiler options from configuration.
 
     Return None if there is no configuration.
 
     """
-    configuration_path = find_configuration(os.path.abspath(start_path))
+    configuration_path = find_configuration(
+        os.path.abspath(start_path),
+        configuration_filename=configuration_filename)
+
     if configuration_path:
         raw_lines = read_lines(configuration_path)
     else:
@@ -69,12 +72,15 @@ def read_configuration(start_path):
 
 
 def main():
-    if len(sys.argv) < 3:
-        raise SystemExit('usage: %s command filename' % (sys.argv[0],))
-    command = sys.argv[1:-1]
+    if len(sys.argv) < 4:
+        raise SystemExit('usage: %s configuration_filename command filename' %
+                         (sys.argv[0],))
+    configuration_filename = sys.argv[1]
+    command = sys.argv[2:-1]
     filename = sys.argv[-1]
 
-    options = read_configuration(filename)
+    options = read_configuration(filename,
+                                 configuration_filename=configuration_filename)
 
     if options is None:
         return 0
