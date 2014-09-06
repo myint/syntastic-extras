@@ -11,6 +11,10 @@ if !exists('g:syntastic_cpp_compiler_options')
     let g:syntastic_cpp_compiler_options = ''
 endif
 
+if !exists('g:syntastic_cpp_config_file')
+    let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 

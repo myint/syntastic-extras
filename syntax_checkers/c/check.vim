@@ -11,6 +11,10 @@ if !exists('g:syntastic_c_compiler_options')
     let g:syntastic_c_compiler_options = '-std=gnu99'
 endif
 
+if !exists('g:syntastic_c_config_file')
+    let g:syntastic_c_config_file = '.syntastic_c_config'
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 
