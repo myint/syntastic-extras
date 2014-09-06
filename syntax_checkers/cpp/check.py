@@ -4,6 +4,7 @@
 
 import locale
 import os
+import shlex
 import subprocess
 import sys
 
@@ -57,9 +58,12 @@ def read_configuration(start_path):
     for line in raw_lines:
         if line.startswith(INCLUDE_OPTION):
             options.append('-isystem')
-            options.append(line[len(INCLUDE_OPTION):].lstrip())
+            relative_path = line[len(INCLUDE_OPTION):].lstrip()
+            options.append(os.path.join(os.path.dirname(configuration_path),
+                                        relative_path))
         else:
-            options.append(line)
+            for token in shlex.split(line):
+                options.append(token)
 
     return options
 
