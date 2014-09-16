@@ -36,7 +36,7 @@ function! SyntaxCheckers_cpp_check_GetLocList() dict
         \ 'args_before': s:checker,
         \ 'args_after':
             \ g:syntastic_cpp_config_file . ' ' .
-            \ g:syntastic_cpp_compiler . ' ' .
+            \ g:syntastic_cpp_compiler . ' -x c++ ' .
             \ g:syntastic_cpp_compiler_options})
 
     return SyntasticMake({

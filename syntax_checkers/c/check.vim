@@ -35,7 +35,7 @@ function! SyntaxCheckers_c_check_GetLocList() dict
         \ 'args_before': s:checker,
         \ 'args_after':
             \ g:syntastic_c_config_file . ' ' .
-            \ g:syntastic_c_compiler . ' ' .
+            \ g:syntastic_c_compiler . ' -x c ' .
             \ g:syntastic_c_compiler_options})
 
     return SyntasticMake({

@@ -5,6 +5,8 @@ trap "echo -e '\x1b[01;31mFailed\x1b[0m'" ERR
 ./syntax_checkers/cfg/cfg.py test/good.cfg
 ./syntax_checkers/c/check.py .syntastic_c_config gcc test/good.c
 ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/good.cpp
+./syntax_checkers/cpp/check.py .syntastic_c_config gcc -x c test/foo/bar.h
+./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ -x c++ test/foo/bar.h
 ./syntax_checkers/yaml/check_yaml.py test/good.yaml
 
 ./syntax_checkers/cfg/cfg.py test/bad.cfg 2>&1 \
