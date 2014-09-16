@@ -85,6 +85,10 @@ def main():
     if options is None:
         return 0
 
+    if filename.endswith(('.h', '.hh', '.hpp')):
+        # Avoid generating precompiled headers.
+        options += ['-c', os.devnull]
+
     process = subprocess.Popen(command + ['-fsyntax-only'] +
                                options + [filename],
                                stderr=subprocess.PIPE)
