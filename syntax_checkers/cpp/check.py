@@ -71,6 +71,15 @@ def read_configuration(start_path, configuration_filename):
     return options
 
 
+def endswith(filename, extensions):
+    """Return True if filename ends with any of the extensions."""
+    # Ugliness for Python 2.4 compatibility.
+    for extension in extensions:
+        if filename.endswith(extension):
+            return True
+    return False
+
+
 def main():
     if len(sys.argv) < 4:
         raise SystemExit('usage: %s configuration_filename command filename' %
@@ -85,7 +94,7 @@ def main():
     if options is None:
         return 0
 
-    if filename.endswith(('.h', '.hh', '.hpp')):
+    if endswith(filename, ('.h', '.hh', '.hpp')):
         # Avoid generating precompiled headers.
         options += ['-c', os.devnull]
 
