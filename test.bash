@@ -29,4 +29,7 @@ then
         | grep 'test/bad.yaml:2'
 fi
 
+# Do not run this under Python 2.4.
+python -m doctest syntax_checkers/*/*.py
+
 echo -e '\x1b[01;32mOkay\x1b[0m'

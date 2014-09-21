@@ -8,6 +8,7 @@ import shlex
 import subprocess
 import sys
 
+HEADER_EXTENSIONS = frozenset(['.h', '.hh', '.hpp', '.h++', '.hxx', '.cuh'])
 INCLUDE_OPTION = '-I'
 
 
@@ -71,17 +72,21 @@ def read_configuration(start_path, configuration_filename):
     return options
 
 
-def ends_with_extension(filename, extensions):
-    """Return True if filename ends with any of the extensions.
+def is_header_file(filename):
+    """Return True if "filename" is a header file.
 
-    Ignore case of filename.
+    >>> is_header_file('foo.c')
+    False
+
+    >>> is_header_file('foo.h')
+    True
+
+    >>> is_header_file('foo.h++')
+    True
 
     """
-    # Ugliness for Python 2.4 compatibility.
-    for extension in extensions:
-        if filename.lower().endswith(extension.lower()):
-            return True
-    return False
+    extension = os.path.splitext(filename)[1]
+    return extension.lower() in HEADER_EXTENSIONS
 
 
 def main():
@@ -98,7 +103,7 @@ def main():
     if options is None:
         return 0
 
-    if ends_with_extension(filename, ['.h', '.hh', '.hpp']):
+    if is_header_file(filename):
         # Avoid generating precompiled headers.
         options += ['-c', os.devnull]
 
