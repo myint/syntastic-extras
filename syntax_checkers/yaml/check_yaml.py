@@ -18,11 +18,6 @@ def main():
 
     try:
         input_file = open(filename, 'rb')
-    except IOError:
-        sys.stderr.write('%s\n' % (sys.exc_info()[1],))
-        return 1
-
-    try:
         try:
             yaml.load(input_file)
         finally:
@@ -37,6 +32,9 @@ def main():
                           mark.column + 1,
                           error.problem))
 
+        return 1
+    except IOError:
+        sys.stderr.write('%s\n' % (sys.exc_info()[1],))
         return 1
 
 

@@ -35,13 +35,12 @@ def read_lines(filename):
     """Return split lines from file without line endings."""
     try:
         input_file = open(filename)
+        try:
+            lines = input_file.read().splitlines()
+        finally:
+            input_file.close()
     except IOError:
         return None
-
-    try:
-        lines = input_file.read().splitlines()
-    finally:
-        input_file.close()
 
     return lines
 
