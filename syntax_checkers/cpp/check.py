@@ -33,13 +33,16 @@ def find_configuration(start_path, configuration_filename):
 
 def read_lines(filename):
     """Return split lines from file without line endings."""
-    input_file = None
     try:
         input_file = open(filename)
+    except IOError:
+        return None
+
+    try:
         lines = input_file.read().splitlines()
     finally:
-        if input_file:
-            input_file.close()
+        input_file.close()
+
     return lines
 
 
@@ -53,9 +56,11 @@ def read_configuration(start_path, configuration_filename):
         os.path.abspath(start_path),
         configuration_filename=configuration_filename)
 
+    raw_lines = None
     if configuration_path:
         raw_lines = read_lines(configuration_path)
-    else:
+
+    if raw_lines is None:
         return None
 
     options = []

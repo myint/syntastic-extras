@@ -16,10 +16,14 @@ def main():
         raise SystemExit('usage: %s filename' % (sys.argv[0],))
     filename = sys.argv[1]
 
-    # Use ugly syntax to support very old versions of Python.
+    try:
+        input_file = open(filename, 'rb')
+    except IOError:
+        sys.stderr.write('%s\n' % (sys.exc_info()[1],))
+        return 1
+
     try:
         try:
-            input_file = open(filename, 'rb')
             yaml.load(input_file)
         finally:
             input_file.close()
