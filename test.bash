@@ -21,6 +21,9 @@ chmod ugo-r test/unreadable
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.cfg 2>&1 \
     | grep 'test/bad.cfg:2' > /dev/null
 
+"$PYTHON" ./syntax_checkers/dosini/dosini.py test/bad.ini 2>&1 \
+    | grep 'test/bad.ini:2' > /dev/null
+
 "$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/bad.c 2>&1 \
     | grep 'test/bad.c:3' > /dev/null
 
