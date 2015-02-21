@@ -23,7 +23,7 @@ let s:checker = expand('<sfile>:p:h') . syntastic#util#Slash() . 'check.py'
 function! SyntaxCheckers_cfg_cfg_IsAvailable() dict
     return executable(self.getExec()) &&
         \ syntastic#util#versionIsAtLeast(
-            \ syntastic#util#getVersion(self.getExecEscaped() . ' -V'), [2, 4])
+            \ self.getVersion(self.getExecEscaped() . ' -V'), [2, 4])
 endfunction
 
 function! SyntaxCheckers_c_check_GetLocList() dict

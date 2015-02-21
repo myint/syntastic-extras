@@ -12,7 +12,7 @@ let s:checker = expand('<sfile>:p:h') . syntastic#util#Slash() .
 function! SyntaxCheckers_yaml_pyyaml_IsAvailable() dict
     return executable(self.getExec()) &&
         \ syntastic#util#versionIsAtLeast(
-            \ syntastic#util#getVersion(self.getExecEscaped() . ' -V'), [2, 4])
+            \ self.getVersion(self.getExecEscaped() . ' -V'), [2, 4])
 endfunction
 
 function! SyntaxCheckers_yaml_pyyaml_GetLocList() dict
