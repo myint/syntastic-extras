@@ -28,6 +28,9 @@ def check_configobj(filename):
     class Parser(configobj.ConfigObj):
 
         def _handle_error(self, text, ErrorClass, infile, cur_index):
+            # Remove irrelevant text in old versions of configobj (<=4).
+            text = re.sub(' *at line "?%s"?. *$', '', text)
+
             errors.append((cur_index + 1, text))
 
     Parser(filename,
