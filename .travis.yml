@@ -3,6 +3,7 @@ language: python
 env:
     -
     - INSTALL_CONFIGOBJ=1
+    - SYNTASTIC_EXTRAS_USE_CONFIG_PARSER=1
 
 install:
     - pip install pyyaml
