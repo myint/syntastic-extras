@@ -1,7 +1,12 @@
 language: python
 
+env:
+    -
+    - INSTALL_CONFIGOBJ=1
+
 install:
     - pip install pyyaml
+    - if [ "$INSTALL_CONFIGOBJ" -eq 1 ]; then pip install configobj; fi
 
 python:
     - "2.6"
