@@ -30,7 +30,8 @@ def check_configobj(filename):
         def _handle_error(self, text, ErrorClass, infile, cur_index):
             errors.append((cur_index + 1, text))
 
-    Parser(filename)
+    Parser(filename,
+           list_values=False)  # Avoid complaining about the values.
 
     return errors
 
