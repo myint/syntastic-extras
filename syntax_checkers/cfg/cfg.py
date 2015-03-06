@@ -64,7 +64,11 @@ def check_configparser(filename):
             if found:
                 line_number = int(found.group(1))
 
-        errors.append((line_number, error.message.splitlines()[0]))
+        message = re.sub(r"^While reading from '.*' \[line *[0-9]+\]: *",
+                         '',
+                         error.message.splitlines()[0]).capitalize()
+
+        errors.append((line_number, message))
 
     return errors
 
