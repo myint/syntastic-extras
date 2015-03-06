@@ -64,7 +64,7 @@ def check_configparser(filename):
             if found:
                 line_number = int(found.group(1))
 
-        errors.append((line_number, error.message))
+        errors.append((line_number, error.message.splitlines()[0]))
 
     return errors
 
