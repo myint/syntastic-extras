@@ -51,6 +51,14 @@ Checkers
     let g:syntastic_gitcommit_checkers = ['language_check']
     let g:syntastic_svn_checkers = ['language_check']
 
+- Python:
+
+.. code-block:: vim
+
+    " Like Syntastic's pyflakes checker, but treats messages about unused
+    " variables/imports as warnings.
+    let g:syntastic_python_checkers = ['pyflakes_with_warnings']
+
 - YAML:
 
 .. code-block:: vim
