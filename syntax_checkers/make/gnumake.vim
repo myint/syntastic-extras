@@ -13,7 +13,7 @@ set cpo&vim
 
 function! SyntaxCheckers_make_gnumake_IsAvailable() dict
     return executable('timeout') &&
-        \ system('make --version') =~# '^GNU Make ' &&
+        \ syntastic#util#system('make --version') =~# '^GNU Make ' &&
         \ v:shell_error == 0
 endfunction
 
