@@ -4,6 +4,7 @@ function! syntastic_extras#quit_hook()
         write
     endif
 
+    echo 'Running Syntastic check'
     SyntasticCheck
     if !exists('b:syntastic_loclist') ||
             \ empty(b:syntastic_loclist) ||
