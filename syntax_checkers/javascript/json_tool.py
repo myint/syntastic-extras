@@ -19,7 +19,7 @@ def main():
 
     # We need this since Vim considers "*.json" files to be "javascript".
     # This checker only works with JSON.
-    if not filename.endswith('.json'):
+    if not filename.lower().endswith('.json'):
         return 0
 
     try:
