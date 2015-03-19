@@ -62,7 +62,7 @@ Checkers
 .. code-block:: vim
 
     " Like Syntastic's pyflakes checker, but treats messages about unused
-    " variables/imports as warnings.
+    " variables/imports as warnings rather than errors.
     let g:syntastic_python_checkers = ['pyflakes_with_warnings']
 
 - YAML:
