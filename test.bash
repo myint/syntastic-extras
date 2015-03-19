@@ -10,7 +10,7 @@ trap "echo -e '\x1b[01;31mFailed\x1b[0m'" ERR
 # Unreadable files should be handled gracefully.
 touch test/unreadable.json
 touch test/unreadable.yaml
-trap 'rm test/unreadable.json test/unreadable.yaml' EXIT
+trap 'rm -f test/unreadable.json test/unreadable.yaml' EXIT
 chmod ugo-r test/unreadable.json
 chmod ugo-r test/unreadable.yaml
 
