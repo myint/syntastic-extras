@@ -8,9 +8,11 @@ fi
 trap "echo -e '\x1b[01;31mFailed\x1b[0m'" ERR
 
 # Unreadable files should be handled gracefully.
-touch test/unreadable
-trap 'rm test/unreadable' EXIT
-chmod ugo-r test/unreadable
+touch test/unreadable.json
+touch test/unreadable.yaml
+trap 'rm test/unreadable.json test/unreadable.yaml' EXIT
+chmod ugo-r test/unreadable.json
+chmod ugo-r test/unreadable.yaml
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/good.cfg
 "$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/good.c
