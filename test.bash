@@ -35,8 +35,17 @@ then
     "$PYTHON" ./syntax_checkers/yaml/check_yaml.py test/good.yaml
     "$PYTHON" ./syntax_checkers/yaml/check_yaml.py test/bad.yaml 2>&1 \
         | grep 'test/bad.yaml:2'
-    "$PYTHON" ./syntax_checkers/yaml/check_yaml.py test/unreadable 2>&1 \
-        | grep 'unreadable'
+    "$PYTHON" ./syntax_checkers/yaml/check_yaml.py test/unreadable.yaml 2>&1 \
+        | grep 'unreadable.yaml'
+fi
+
+if "$PYTHON" -c 'import json' >& /dev/null
+then
+    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/good.json
+    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/bad.json 2>&1 \
+        | grep 'test/bad.json:2'
+    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/unreadable.json 2>&1 \
+        | grep 'unreadable.json'
 fi
 
 "$PYTHON" ./syntax_checkers/cpp/check.py unreadable echo echo

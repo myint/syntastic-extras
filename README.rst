@@ -44,6 +44,12 @@ Checkers
 
     let g:syntastic_make_checkers = ['gnumake']
 
+- JSON
+
+.. code-block:: vim
+
+    let g:syntastic_javascript_checkers = ['json_tool']
+
 - Language check in ``gitcommit``/``svn`` (commit prompts):
 
 .. code-block:: vim
