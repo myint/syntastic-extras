@@ -7,7 +7,6 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-import os
 import re
 import sys
 
@@ -24,6 +23,9 @@ def check_configobj(filename):
 
     """
     errors = []
+
+    if not configobj:
+        return errors
 
     class Parser(configobj.ConfigObj):
 
@@ -73,22 +75,42 @@ def check_configparser(filename):
     return errors
 
 
+def might_be_configobj_format(filename):
+    input_file = open(filename)
+    try:
+        for line in input_file.readlines():
+            # Check if there is a subsection.
+            if re.match(r'^\s*\[\[.*\]\]\s*$', line):
+                return True
+    finally:
+        input_file.close()
+
+    return False
+
+
 def main():
     if len(sys.argv) != 2:
         raise SystemExit('usage: %s filename' % (sys.argv[0],))
     filename = sys.argv[1]
 
-    # Default to configobj first since it supports subsections and has better
-    # error messages.
-    if configobj and not os.getenv('SYNTASTIC_EXTRAS_USE_CONFIG_PARSER'):
-        errors = check_configobj(filename)
-    else:
-        errors = check_configparser(filename)
+    try:
+        # Use configobj only if there seems to be subsections. In such cases,
+        # configobj is needed. Otherwise don't use it since there is syntax
+        # in configparser that configobj does not understand. An example of this
+        # is multiline values. configparser supports this, but configobj requires
+        # triple quotes.
+        if might_be_configobj_format(filename):
+            errors = check_configobj(filename)
+        else:
+            errors = check_configparser(filename)
 
-    for (line_number, message) in errors:
-        sys.stderr.write('%s:%s: %s\n' %
-                         (filename, line_number, message))
-        return 1
+        for (line_number, message) in errors:
+            sys.stderr.write('%s:%s: %s\n' %
+                             (filename, line_number, message))
+            return 1
+    except IOError:
+        # Ignore unreadable files.
+        pass
 
 
 if __name__ == '__main__':

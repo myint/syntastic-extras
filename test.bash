@@ -15,6 +15,7 @@ chmod ugo-r test/unreadable.json
 chmod ugo-r test/unreadable.yaml
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/good.cfg
+"$PYTHON" ./syntax_checkers/cfg/cfg.py test/good_with_subsections.cfg
 "$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/good.c
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/good.cpp
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_c_config gcc -x c test/foo/bar.h
@@ -22,6 +23,8 @@ chmod ugo-r test/unreadable.yaml
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.cfg 2>&1 \
     | grep 'test/bad.cfg:2' > /dev/null
+"$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad_with_subsections.cfg 2>&1 \
+    | grep 'test/bad_with_subsections.cfg:2' > /dev/null
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.ini 2>&1 \
     | grep 'test/bad.ini:2' > /dev/null
