@@ -95,10 +95,10 @@ def main():
 
     try:
         # Use configobj only if there seems to be subsections. In such cases,
-        # configobj is needed. Otherwise don't use it since there is syntax
-        # in configparser that configobj does not understand. An example of this
-        # is multiline values. configparser supports this, but configobj requires
-        # triple quotes.
+        # configobj is needed. Otherwise don't use it since there is syntax in
+        # configparser that configobj does not understand. An example of this
+        # is multiline values. configparser supports this, but configobj
+        # requires triple quotes.
         if might_be_configobj_format(filename):
             errors = check_configobj(filename)
         else:
