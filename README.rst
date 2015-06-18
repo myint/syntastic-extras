@@ -19,7 +19,8 @@ Checkers
 
     " Like Syntastic's normal checker, but only checks files if there is a
     " '.syntastic_c_config' file existing in the directory or an ancestor
-    " directory.
+    " directory. It ignores warnings in included files by using ``-isystem``
+    " instead of ``-I``.
     let g:syntastic_c_checkers = ['check']
 
 - C++:
@@ -28,7 +29,8 @@ Checkers
 
     " Like Syntastic's normal checker, but only checks files if there is a
     " '.syntastic_cpp_config' file existing in the directory or an ancestor
-    " directory.
+    " directory. It ignores warnings in included files by using ``-isystem``
+    " instead of ``-I``.
     let g:syntastic_cpp_checkers = ['check']
 
 - ``cfg``/``dosini``:
