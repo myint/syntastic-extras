@@ -5,6 +5,7 @@
 import locale
 import os
 import shlex
+import re
 import subprocess
 import sys
 
@@ -120,9 +121,10 @@ def main():
         errors = errors.decode(locale.getpreferredencoding())
 
     exit_status = 0
+    regex = re.compile('[/a-zA-Z0-9-<>.]+:[0-9]+:[0-9]+:[a-zA-Z ]+:.*')
 
     for line in errors.splitlines(True):
-        if filename in line or 'built-in' in line:
+        if re.search(regex, line):
             sys.stderr.write(line)
             exit_status = 1
 
