@@ -122,9 +122,8 @@ def main():
     exit_status = 0
 
     for line in errors.splitlines(True):
-        if filename in line:
-            sys.stderr.write(line)
-            exit_status = 1
+        sys.stderr.write(line)
+        exit_status = 1
 
     return exit_status
 
