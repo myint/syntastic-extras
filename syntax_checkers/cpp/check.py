@@ -8,6 +8,7 @@ import shlex
 import subprocess
 import sys
 
+
 HEADER_EXTENSIONS = frozenset(['.h', '.hh', '.hpp', '.h++', '.hxx', '.cuh'])
 INCLUDE_OPTION = '-I'
 
