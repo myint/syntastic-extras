@@ -2,8 +2,6 @@
 
 """Remove comments before passing output to proselint."""
 
-# Use ugly syntax to support very old versions of Python.
-
 import locale
 import re
 import subprocess
@@ -30,7 +28,8 @@ def main():
             input_file.close()
     except IOError:
         # Ignore unreadable file.
-        return 0
+        sys.stderr.write('%s\n' % (sys.exc_info()[1],))
+        return 1
 
     try:
         process = subprocess.Popen(['proselint', '-'],
