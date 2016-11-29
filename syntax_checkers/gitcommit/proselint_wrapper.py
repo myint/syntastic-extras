@@ -30,11 +30,15 @@ def main():
             input_file.close()
     except IOError:
         # Ignore unreadable file.
-        pass
+        return 0
 
-    process = subprocess.Popen(['proselint', '-'],
-                               stdin=subprocess.PIPE,
-                               stdout=subprocess.PIPE)
+    try:
+        process = subprocess.Popen(['proselint', '-'],
+                                   stdin=subprocess.PIPE,
+                                   stdout=subprocess.PIPE)
+    except OSError:
+        # Ignore if proselint is not installed.
+        return 0
 
     encoding = locale.getpreferredencoding()
 
@@ -46,6 +50,8 @@ def main():
     for line in output.splitlines(True):
         filtered_line = re.sub('^-:', filename + ':', line)
         sys.stdout.write(filtered_line)
+
+    return process.returncode
 
 
 if __name__ == '__main__':

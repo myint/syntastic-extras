@@ -7,11 +7,10 @@ env:
     - INSTALL_CONFIGOBJ=x
 
 install:
-    - pip install pyyaml
+    - pip install proselint pyyaml
     - if [ -v INSTALL_CONFIGOBJ ]; then pip install configobj; fi
 
 python:
-    - "2.6"
     - "2.7"
     - "3.2"
     - "3.3"

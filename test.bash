@@ -1,4 +1,6 @@
-#!/bin/bash -ex
+#!/bin/bash
+
+set -ex
 
 if [[ -z "$PYTHON" ]]
 then
@@ -20,6 +22,7 @@ chmod ugo-r test/unreadable.yaml
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/good.cpp
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_c_config gcc -x c test/foo/bar.h
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ -x c++ test/foo/bar.h
+"$PYTHON" ./syntax_checkers/gitcommit/proselint_wrapper.py test/good_git
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.cfg 2>&1 \
     | grep 'test/bad.cfg:2' > /dev/null
@@ -34,6 +37,9 @@ chmod ugo-r test/unreadable.yaml
 
 "$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/bad.cpp 2>&1 \
     | grep 'test/bad.cpp:3' > /dev/null
+
+"$PYTHON" ./syntax_checkers/gitcommit/proselint_wrapper.py test/bad_git 2>& 1 \
+    | grep 'test/bad_git:1:2: ' > /dev/null
 
 if "$PYTHON" -c 'import yaml' >& /dev/null
 then
