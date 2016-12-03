@@ -39,7 +39,7 @@ chmod ugo-r test/unreadable.yaml
     | grep 'test/bad.cpp:3' > /dev/null
 
 "$PYTHON" ./syntax_checkers/gitcommit/proselint_wrapper.py test/bad.gitcommit 2>& 1 \
-    | grep 'test/bad.gitcommit:1:2: ' > /dev/null
+    | grep 'test/bad.gitcommit:3' > /dev/null
 
 if "$PYTHON" -c 'import yaml' >& /dev/null
 then
