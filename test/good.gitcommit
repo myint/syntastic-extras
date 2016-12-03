@@ -1,2 +1,5 @@
 The cat is here
+# Comments should be ignored.
 # The the cat is here
+# Everything below the comment block should be ignored too.
+The the cat is here
