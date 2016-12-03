@@ -21,7 +21,9 @@ def main():
         try:
             for line in input_file.readlines():
                 if line.startswith('#'):
-                    input_lines.append('\n')
+                    # Ignore everything below the comments like the diff that
+                    # shows up in verbose commit mode.
+                    break
                 else:
                     input_lines.append(line)
         finally:
