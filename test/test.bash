@@ -9,6 +9,9 @@ fi
 
 trap "echo -e '\x1b[01;31mFailed\x1b[0m'" ERR
 
+readonly script_directory=$(dirname "$0")
+cd "$script_directory"/..
+
 # Unreadable files should be handled gracefully.
 touch test/unreadable.json
 touch test/unreadable.yaml

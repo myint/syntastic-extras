@@ -17,4 +17,4 @@ python:
     - "3.5"
 
 script:
-    - ./test.bash
+    - ./test/test.bash
