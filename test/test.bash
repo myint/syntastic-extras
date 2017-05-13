@@ -55,10 +55,10 @@ fi
 
 if "$PYTHON" -c 'import json' >& /dev/null
 then
-    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/good.json
-    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/bad.json 2>&1 \
+    "$PYTHON" ./syntax_checkers/json/json_tool.py test/good.json
+    "$PYTHON" ./syntax_checkers/json/json_tool.py test/bad.json 2>&1 \
         | grep 'test/bad.json:2'
-    "$PYTHON" ./syntax_checkers/javascript/json_tool.py test/unreadable.json 2>&1 \
+    "$PYTHON" ./syntax_checkers/json/json_tool.py test/unreadable.json 2>&1 \
         | grep 'unreadable.json'
 fi
 
