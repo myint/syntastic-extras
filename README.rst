@@ -51,6 +51,7 @@ Checkers
 .. code-block:: vim
 
     let g:syntastic_javascript_checkers = ['json_tool']
+    let g:syntastic_json_checkers = ['json_tool']
 
 - Language check in ``gitcommit``/``svn`` (commit prompts):
 
