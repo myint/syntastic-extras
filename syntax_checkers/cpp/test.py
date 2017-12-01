@@ -43,6 +43,8 @@ def main():
     exit_status = 0
 
     for filename in sys.argv[1:]:
+        filename = os.path.abspath(filename)
+
         configuration_filename = check.find_configuration(
             start_path=filename,
             configuration_filename=get_configuration_base_name(filename)
