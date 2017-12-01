@@ -67,4 +67,12 @@ fi
 # Do not run this under Python 2.4.
 python -m doctest syntax_checkers/*/*.py
 
+"$PYTHON" ./syntax_checkers/cpp/test.py test/good.cpp
+"$PYTHON" ./syntax_checkers/cpp/test.py test/bad.cpp 2>&1 \
+    | grep 'test/bad.cpp:3' > /dev/null
+
+"$PYTHON" ./syntax_checkers/cpp/test.py test/good.c
+"$PYTHON" ./syntax_checkers/cpp/test.py test/bad.c 2>&1 \
+    | grep 'test/bad.c:3' > /dev/null
+
 echo -e '\x1b[01;32mOkay\x1b[0m'

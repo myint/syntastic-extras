@@ -94,23 +94,23 @@ def is_header_file(filename):
     return extension.lower() in HEADER_EXTENSIONS
 
 
-def main():
-    if len(sys.argv) < 4:
-        raise SystemExit('usage: %s configuration_filename command filename' %
-                         (sys.argv[0],))
-    configuration_filename = sys.argv[1]
-    command = sys.argv[2:-1]
-    filename = sys.argv[-1]
-
+def check(configuration_filename, command, filename, verbose_file=None):
+    """Return list of error messages."""
     options = read_configuration(filename,
                                  configuration_filename=configuration_filename)
 
     if options is None:
-        return 0
+        return []
 
     if is_header_file(filename):
         # Avoid generating precompiled headers.
         options += ['-c', os.devnull]
+
+
+    full_command = command + ['-fsyntax-only'] + options + [filename]
+
+    if verbose_file:
+        verbose_file.write(' '.join(full_command) + '\n')
 
     process = subprocess.Popen(command + ['-fsyntax-only'] +
                                options + [filename],
@@ -120,9 +120,19 @@ def main():
     if sys.version_info[0] > 2:
         errors = errors.decode(locale.getpreferredencoding())
 
+    return errors.splitlines(True)
+
+
+def main():
+    if len(sys.argv) < 4:
+        raise SystemExit('usage: %s configuration_filename command filename' %
+                         (sys.argv[0],))
+
     exit_status = 0
 
-    for line in errors.splitlines(True):
+    for line in check(configuration_filename=sys.argv[1],
+                      command=sys.argv[2:-1],
+                      filename=sys.argv[-1]):
         sys.stderr.write(line)
         exit_status = 1
 

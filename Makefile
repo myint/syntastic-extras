@@ -1,7 +1,4 @@
-default: .git/hooks/pre-push test
-
-.git/hooks/pre-push: hooks/pre-push
-	cd .git/hooks && ln -fs ../../hooks/pre-push .
+default: test
 
 test:
 	PYTHON=python2.4 ./test/test.bash
