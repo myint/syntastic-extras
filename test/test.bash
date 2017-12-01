@@ -75,4 +75,12 @@ python -m doctest syntax_checkers/*/*.py
 "$PYTHON" ./syntax_checkers/cpp/test.py test/bad.c 2>&1 \
     | grep 'test/bad.c:3' > /dev/null
 
+"$PYTHON" ./syntax_checkers/cpp/test.py test/good_header.h
+"$PYTHON" ./syntax_checkers/cpp/test.py test/good_header.cpp
+
+"$PYTHON" ./syntax_checkers/cpp/test.py test/bad_header.h 2>&1 \
+    | grep 'test/bad_header.h:1' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/test.py test/bad_header.c 2>&1 \
+    | grep 'test/bad_header.c:1' > /dev/null
+
 echo -e '\x1b[01;32mOkay\x1b[0m'
