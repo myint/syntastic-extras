@@ -10,7 +10,7 @@ import check
 
 def get_command(source_code_filename):
     if is_cpp(source_code_filename):
-        return [os.getenv('CXX', 'g++')]
+        return [os.getenv('CXX', 'g++'), '-x', 'c++']
     else:
         return [os.getenv('CC', 'gcc')]
 
@@ -24,12 +24,11 @@ def get_configuration_base_name(source_code_filename):
 
 def is_cpp(filename):
     (root, extension) = os.path.splitext(filename)
-    if extension == '.C':
-        return True
-    elif extension == '.c':
+    if extension == '.c':
         return False
     elif extension == '.h':
-        if os.path.isfile(os.path.join(root, '.c')):
+        # This could be C or C++. Guess based on its sibling file.
+        if os.path.isfile(root + '.c'):
             return False
         else:
             return True
