@@ -22,7 +22,7 @@ def get_command(source_code_filename):
     if is_cpp(source_code_filename):
         return [os.getenv('CXX', 'g++'), '-x', 'c++']
     else:
-        return [os.getenv('CC', 'gcc')]
+        return [os.getenv('CC', 'gcc'), '-x', 'c']
 
 
 def get_configuration_base_name(source_code_filename):
