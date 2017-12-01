@@ -8,6 +8,16 @@ import sys
 import check
 
 
+def is_file(path):
+    """Return True if path is a regular file.
+
+    This is case sensitive.
+
+    """
+    (directory, base_filename) = os.path.split(path)
+    return base_filename in os.listdir(directory)
+
+
 def get_command(source_code_filename):
     if is_cpp(source_code_filename):
         return [os.getenv('CXX', 'g++'), '-x', 'c++']
@@ -28,7 +38,9 @@ def is_cpp(filename):
         return False
     elif extension == '.h':
         # This could be C or C++. Guess based on its sibling file.
-        if os.path.isfile(root + '.c'):
+        # Use a case sensitive variant of `os.path.isfile()` since `.C` would
+        # be C++.
+        if is_file(root + '.c'):
             return False
         else:
             return True
