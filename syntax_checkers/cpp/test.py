@@ -56,15 +56,11 @@ def main():
     for filename in sys.argv[1:]:
         filename = os.path.abspath(filename)
 
-        configuration_filename = check.find_configuration(
-            start_path=filename,
-            configuration_filename=get_configuration_base_name(filename)
-        ) or os.devnull
-
-        for line in check.check(configuration_filename=configuration_filename,
-                                command=get_command(filename),
-                                filename=filename,
-                                verbose_file=sys.stderr):
+        for line in check.check(
+                configuration_filename=get_configuration_base_name(filename),
+                command=get_command(filename),
+                filename=filename,
+                verbose_file=sys.stderr):
             sys.stderr.write(line)
             exit_status = 1
 
