@@ -18,9 +18,9 @@ Checkers
 .. code-block:: vim
 
     " Like Syntastic's normal checker, but only checks files if there is a
-    " '.syntastic_c_config' file existing in the directory or an ancestor
-    " directory. It ignores warnings in included files by using '-isystem'
-    " instead of '-I'. It also supports `compile_commands.json` files generated
+    " `.syntastic_c_config` file existing in the directory or an ancestor
+    " directory. It ignores warnings in included files by using `-isystem`
+    " instead of `-I`. It also supports `compile_commands.json` files generated
     " by CMake. `compile_commands.json` is used if the Syntastic configuration
     " file is not found. `compile_commands.json` is found using a ancestor
     " search for `build/compile_commands.json`.
@@ -30,7 +30,8 @@ Checkers
 
 .. code-block:: vim
 
-    " See above.
+    " See above, but replace '.syntastic_c_config' with
+    " `.syntastic_cpp_config`.
     let g:syntastic_cpp_checkers = ['check']
 
 - ``cfg``/``dosini``:
