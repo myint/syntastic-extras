@@ -21,10 +21,10 @@ chmod ugo-r test/unreadable.yaml
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/good.cfg
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/good_with_subsections.cfg
-"$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/good.c
-"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/good.cpp
-"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_c_config gcc -x c test/foo/bar.h
-"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ -x c++ test/foo/bar.h
+"$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/syntastic_config/good.c
+"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/syntastic_config/good.cpp
+"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_c_config gcc -x c test/syntastic_config/foo/bar.h
+"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ -x c++ test/syntastic_config/foo/bar.h
 "$PYTHON" ./syntax_checkers/gitcommit/proselint_wrapper.py test/good.gitcommit
 
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.cfg 2>&1 \
@@ -35,11 +35,11 @@ chmod ugo-r test/unreadable.yaml
 "$PYTHON" ./syntax_checkers/cfg/cfg.py test/bad.ini 2>&1 \
     | grep 'test/bad.ini:2' > /dev/null
 
-"$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/bad.c 2>&1 \
-    | grep 'test/bad.c:3' > /dev/null
+"$PYTHON" ./syntax_checkers/c/check.py .syntastic_c_config gcc test/syntastic_config/bad.c 2>&1 \
+    | grep 'test/syntastic_config/bad.c:3' > /dev/null
 
-"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/bad.cpp 2>&1 \
-    | grep 'test/bad.cpp:3' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/check.py .syntastic_cpp_config g++ test/syntastic_config/bad.cpp 2>&1 \
+    | grep 'test/syntastic_config/bad.cpp:3' > /dev/null
 
 "$PYTHON" ./syntax_checkers/gitcommit/proselint_wrapper.py test/bad.gitcommit 2>& 1 \
     | grep 'test/bad.gitcommit:3' > /dev/null
@@ -67,20 +67,25 @@ fi
 # Do not run this under Python 2.4.
 python -m doctest syntax_checkers/*/*.py
 
-"$PYTHON" ./syntax_checkers/cpp/test.py test/good.cpp
-"$PYTHON" ./syntax_checkers/cpp/test.py test/bad.cpp 2>&1 \
-    | grep 'test/bad.cpp:3' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.cpp
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/bad.cpp 2>&1 \
+    | grep 'test/syntastic_config/bad.cpp:3' > /dev/null
 
-"$PYTHON" ./syntax_checkers/cpp/test.py test/good.c
-"$PYTHON" ./syntax_checkers/cpp/test.py test/bad.c 2>&1 \
-    | grep 'test/bad.c:3' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.c
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/bad.c 2>&1 \
+    | grep 'test/syntastic_config/bad.c:3' > /dev/null
 
-"$PYTHON" ./syntax_checkers/cpp/test.py test/good_header.h
-"$PYTHON" ./syntax_checkers/cpp/test.py test/good_header.cpp
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good_header.h
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good_header.cpp
 
-"$PYTHON" ./syntax_checkers/cpp/test.py test/bad_header.h 2>&1 \
-    | grep 'test/bad_header.h:1' > /dev/null
-"$PYTHON" ./syntax_checkers/cpp/test.py test/bad_header.c 2>&1 \
-    | grep 'test/bad_header.c:1' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/bad_header.h 2>&1 \
+    | grep 'test/syntastic_config/bad_header.h:1' > /dev/null
+"$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/bad_header.c 2>&1 \
+    | grep 'test/syntastic_config/bad_header.c:1' > /dev/null
+
+# Do not run this under Python 2.4 as it requires the `json` module.
+python ./syntax_checkers/cpp/test.py test/compile_commands/good.cpp
+python ./syntax_checkers/cpp/test.py test/compile_commands/bad.cpp 2>&1 \
+    | grep 'test/compile_commands/bad.cpp:3' > /dev/null
 
 echo -e '\x1b[01;32mOkay\x1b[0m'
