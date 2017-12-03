@@ -99,7 +99,7 @@ def find_compile_commands_json(source_filename):
     return None
 
 
-def get_compile_options(command):
+def get_compile_options(command, filename):
     """Return compile options for syntax checking."""
     options = []
 
@@ -111,6 +111,12 @@ def get_compile_options(command):
             break
 
         index += 1
+
+        try:
+            if os.path.samefile(item, filename):
+                continue
+        except OSError:
+            pass
 
         if item == '-o':
             index += 1
@@ -146,7 +152,7 @@ def read_compile_commands_json(source_filename):
     for entry in compile_commands:
         if os.path.samefile(entry['file'], source_filename):
             command = entry['command'].split()
-            return get_compile_options(command)
+            return get_compile_options(command, source_filename)
 
     return None
 
