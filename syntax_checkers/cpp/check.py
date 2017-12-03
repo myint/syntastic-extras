@@ -120,8 +120,9 @@ def get_compile_options(command, filename):
 
         if item == '-o':
             index += 1
-        else:
-            options.append(item)
+            continue
+
+        options.append(item)
 
     return options
 
