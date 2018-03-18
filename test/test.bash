@@ -88,4 +88,12 @@ python ./syntax_checkers/cpp/test.py test/compile_commands/good.cpp
 python ./syntax_checkers/cpp/test.py test/compile_commands/bad.cpp 2>&1 \
     | grep 'test/compile_commands/bad.cpp:3' > /dev/null
 
+# With `CC` or `CXX` composed of multiple arguments.
+CC='echo hello world' \
+    "$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.c \
+    | grep 'hello world'
+CXX='echo hello world' \
+    "$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.cpp \
+    | grep 'hello world'
+
 echo -e '\x1b[01;32mOkay\x1b[0m'
