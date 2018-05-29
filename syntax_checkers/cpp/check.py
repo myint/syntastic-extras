@@ -151,9 +151,12 @@ def read_compile_commands_json(source_filename):
         return None
 
     for entry in compile_commands:
-        if os.path.samefile(entry['file'], source_filename):
-            command = entry['command'].split()
-            return get_compile_options(command, source_filename)
+        try:
+            if os.path.samefile(entry['file'], source_filename):
+                command = entry['command'].split()
+                return get_compile_options(command, source_filename)
+        except OSError:
+            pass
 
     return None
 
