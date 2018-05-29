@@ -22,7 +22,7 @@ Checkers
     " directory. It ignores warnings in included files by using `-isystem`
     " instead of `-I`. It also supports `compile_commands.json` files generated
     " by CMake. `compile_commands.json` is used if the Syntastic configuration
-    " file is not found. `compile_commands.json` is found using a ancestor
+    " file is not found. `compile_commands.json` is found using an ancestor
     " search for `build/compile_commands.json`.
     let g:syntastic_c_checkers = ['check']
 
