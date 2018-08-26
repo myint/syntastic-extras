@@ -49,7 +49,8 @@ def main():
         output = output.decode(encoding)
 
     for line in output.splitlines(True):
-        filtered_line = re.sub('^-:', filename + ':', line)
+        # proselint 0.10 changed the output message from `-:` to `<stdin>:`.
+        filtered_line = re.sub('^(-|<stdin>):', filename + ':', line)
         sys.stdout.write(filtered_line)
 
     return process.returncode
