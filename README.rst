@@ -61,6 +61,12 @@ Checkers
     let g:syntastic_gitcommit_checkers = ['language_check']
     let g:syntastic_svn_checkers = ['language_check']
 
+- ``proselint`` in ``gitcommit`` (commit prompts):
+
+.. code-block:: vim
+
+    let g:syntastic_gitcommit_checkers = ['proselint']
+
 - Python:
 
 .. code-block:: vim
