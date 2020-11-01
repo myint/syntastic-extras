@@ -36,7 +36,8 @@ function! SyntaxCheckers_python_pyflakes_with_warnings_GetLocList() dict
     let errorformat =
         \ '%E%f:%l: could not compile,'.
         \ '%-Z%p^,'.
-        \ '%E%f:%l:%c: %m,'.
+        \ '%E%f:%l:%c:%\= %m,'.
+        \ '%E%f:%l:%\= %m,'.
         \ '%E%f:%l: %m,'.
         \ '%-G%.%#'
 
