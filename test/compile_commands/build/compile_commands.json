@@ -1,12 +1,12 @@
 [
 {
   "directory": "/Users/myint/projects/perceptualdiff/build",
-  "command": "c++ -isystem test/compile_commands/header_directory -o ignore_this.o -c test/compile_commands/good.cpp",
+  "command": "c++ -Werror -DDEFINED -DCONFIG_VALUE=42 -isystem test/compile_commands/header_directory -nostdinc++ -o ignore_this.o -c test/compile_commands/good.cpp",
   "file": "test/compile_commands/good.cpp"
 },
 {
   "directory": "/Users/myint/projects/perceptualdiff/build",
-  "command": "c++ -isystem test/compile_commands/header_directory -o ignore_this.o -c test/compile_commands/bad.cpp",
+  "command": "c++ -Werror -DDEFINED -DCONFIG_VALUE=42 -isystem test/compile_commands/header_directory -nostdinc++ -o ignore_this.o -c test/compile_commands/bad.cpp",
   "file": "test/compile_commands/bad.cpp"
 }
 ]

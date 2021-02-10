@@ -1,0 +1,36 @@
+[
+{
+  "directory": "/Users/myint/projects/perceptualdiff/build",
+  "arguments": [
+      "c++",
+      "-Werror",
+      "-DDEFINED",
+      "-DCONFIG_VALUE=42",
+      "-isystem",
+      "test/bear_compile_commands/header_directory",
+      "-nostdinc++",
+      "-o",
+      "ignore_this.o",
+      "-c",
+      "test/bear_compile_commands/good.cpp"
+  ],
+  "file": "test/bear_compile_commands/good.cpp"
+},
+{
+  "directory": "/Users/myint/projects/perceptualdiff/build",
+  "arguments": [
+      "c++",
+      "-Werror",
+      "-DDEFINED",
+      "-DCONFIG_VALUE=42",
+      "-isystem",
+      "test/bear_compile_commands/header_directory",
+      "-nostdinc++",
+      "-o",
+      "ignore_this.o",
+      "-c",
+      "test/bear_compile_commands/bad.cpp"
+  ],
+  "file": "test/bear_compile_commands/bad.cpp"
+}
+]
