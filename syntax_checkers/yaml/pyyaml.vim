@@ -27,7 +27,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'yaml',
-    \ 'exec': 'python',
+    \ 'exec': 'python3',
     \ 'name': 'pyyaml'})
 
 let &cpo = s:save_cpo

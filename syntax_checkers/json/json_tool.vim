@@ -27,7 +27,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'json',
-    \ 'exec': 'python',
+    \ 'exec': 'python3',
     \ 'name': 'json_tool'})
 
 let &cpo = s:save_cpo

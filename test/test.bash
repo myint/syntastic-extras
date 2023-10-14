@@ -4,7 +4,7 @@ set -ex
 
 if [[ -z "$PYTHON" ]]
 then
-    PYTHON=python
+    PYTHON=python3
 fi
 
 trap "echo -e '\x1b[01;31mFailed\x1b[0m'" ERR
@@ -65,7 +65,7 @@ fi
 "$PYTHON" ./syntax_checkers/cpp/check.py unreadable echo echo
 
 # Do not run this under Python 2.4.
-python -m doctest syntax_checkers/*/*.py
+python3 -m doctest syntax_checkers/*/*.py
 
 "$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.cpp
 "$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/bad.cpp 2>&1 \
@@ -84,8 +84,8 @@ python -m doctest syntax_checkers/*/*.py
     | grep 'test/syntastic_config/bad_header.c:1' > /dev/null
 
 # Do not run this under Python 2.4 as it requires the `json` module.
-python ./syntax_checkers/cpp/test.py test/compile_commands/good.cpp
-python ./syntax_checkers/cpp/test.py test/compile_commands/bad.cpp 2>&1 \
+python3 ./syntax_checkers/cpp/test.py test/compile_commands/good.cpp
+python3 ./syntax_checkers/cpp/test.py test/compile_commands/bad.cpp 2>&1 \
     | grep 'test/compile_commands/bad.cpp:3' > /dev/null
 
 # With `CC` or `CXX` composed of multiple arguments.

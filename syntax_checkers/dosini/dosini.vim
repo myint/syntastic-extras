@@ -7,6 +7,6 @@ runtime! syntax_checkers/cfg/cfg.vim
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'dosini',
-    \ 'exec': 'python',
+    \ 'exec': 'python3',
     \ 'name': 'dosini',
     \ 'redirect': 'cfg/cfg'})

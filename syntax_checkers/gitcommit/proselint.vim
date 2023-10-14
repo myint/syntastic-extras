@@ -32,7 +32,7 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'gitcommit',
     \ 'name': 'proselint',
-    \ 'exec': 'python'})
+    \ 'exec': 'python3'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

@@ -54,7 +54,7 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'cpp',
     \ 'name': 'check',
-    \ 'exec': 'python'})
+    \ 'exec': 'python3'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

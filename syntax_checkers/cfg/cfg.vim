@@ -26,7 +26,7 @@ endfunction
 
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'cfg',
-    \ 'exec': 'python',
+    \ 'exec': 'python3',
     \ 'name': 'cfg'})
 
 let &cpo = s:save_cpo

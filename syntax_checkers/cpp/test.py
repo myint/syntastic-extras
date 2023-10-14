@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Utility to easily use `check.py` from the command line instead of Vim."""
 
