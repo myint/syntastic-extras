@@ -99,32 +99,23 @@ def find_compile_commands_json(source_filename):
     return None
 
 
-def get_compile_options(command, filename):
-    """Return compile options for syntax checking."""
-    options = []
+def option(directory):
+    return lambda x: x.group(0) if x.group(1) != 'I' else '-I' + os.path.join(directory, x.group(2))
 
-    index = 1
-    while True:
-        try:
-            item = command[index]
-        except IndexError:
-            break
 
-        index += 1
+def command(input):
+    import re
+    return lambda e: re.finditer(e, input)
 
-        try:
-            if os.path.samefile(item, filename):
-                continue
-        except OSError:
-            pass
 
-        if item == '-o':
-            index += 1
-            continue
+def arguments(input):
+    return command(' '.join(input))
 
-        options.append(item)
 
-    return options
+def get_compile_options(entry):
+    input = arguments(entry['arguments']) if 'arguments' in entry else command(entry['command'])
+    filter_expr = r'-(W|D|I|include|isystem|isysroot|imacros|std)\s*([^\s]+)|-nostdinc\+{0,2}'
+    return shlex.split(' '.join(map(option(entry['directory']), input(filter_expr))))
 
 
 def read_compile_commands_json(source_filename):
@@ -153,13 +144,11 @@ def read_compile_commands_json(source_filename):
     for entry in compile_commands:
         try:
             if os.path.samefile(entry['file'], source_filename):
-                command = entry['command'].split()
-                return get_compile_options(command, source_filename)
+                return get_compile_options(entry)
         except OSError:
             pass
 
     return None
-
 
 
 def is_header_file(filename):
@@ -190,19 +179,15 @@ def check(configuration_filename, command, filename, verbose_file=None):
         if options is None:
             return []
 
-    if is_header_file(filename):
-        # Avoid generating precompiled headers.
-        options += ['-c', os.devnull]
-
+    # Avoid generating precompiled headers.
+    options += ['-c', os.devnull] if is_header_file(filename) else ['-c']
 
     full_command = command + ['-fsyntax-only'] + options + [filename]
 
     if verbose_file:
         verbose_file.write(' '.join(full_command) + '\n')
 
-    process = subprocess.Popen(command + ['-fsyntax-only'] +
-                               options + [filename],
-                               stderr=subprocess.PIPE)
+    process = subprocess.Popen(full_command, stderr=subprocess.PIPE)
 
     errors = process.communicate()[1]
     if sys.version_info[0] > 2:

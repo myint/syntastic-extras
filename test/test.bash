@@ -88,6 +88,10 @@ python3 ./syntax_checkers/cpp/test.py test/compile_commands/good.cpp
 python3 ./syntax_checkers/cpp/test.py test/compile_commands/bad.cpp 2>&1 \
     | grep 'test/compile_commands/bad.cpp:3' > /dev/null
 
+python ./syntax_checkers/cpp/test.py test/bear_compile_commands/good.cpp
+python ./syntax_checkers/cpp/test.py test/bear_compile_commands/bad.cpp 2>&1 \
+    | grep 'test/bear_compile_commands/bad.cpp:3' > /dev/null
+
 # With `CC` or `CXX` composed of multiple arguments.
 CC='echo hello world' \
     "$PYTHON" ./syntax_checkers/cpp/test.py test/syntastic_config/good.c \
